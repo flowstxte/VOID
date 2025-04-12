@@ -53,9 +53,39 @@ document.addEventListener('DOMContentLoaded', function() {
         if (typeof Howl !== 'undefined') {
             console.log('Initializing sound effects...');
             sounds = {
-                tick: new Howl({ src: ['data:audio/mp3;base64,SUQzAwAAAAAAJlRJVDIAAAAXAAAAU291bmQgRWZmZWN0IC0gQ2xpY2sAVEVOQwAAAAEAAAAAAAAAAAAAAAAAAAAAAAD/+0TAAAAA/wAAABAAECLQAAAEUGFhcmEAAOADAAP/4HfZAAAAAAAAAAAAAAAAMVRTU0UAAAAOAAADTEM4MDAyMXg5AA=='], volume: 0.3 }),
-                beep: new Howl({ src: ['data:audio/mp3;base64,SUQzAwAAAAAAJlRJVDIAAAAXAAAAU291bmQgRWZmZWN0IC0gQmVlcCAAVEVOQwAAAAEAAAAAAAAAAAAAAAAAAAAAAAD/+0TAAAAAwAAABAAEDYAAAAGMmFhcmIAAAIEAAAfgAAAC///////////8AAAIAAADNEfgAAAAAAAAA=='], volume: 0.5 }),
-                lap: new Howl({ src: ['data:audio/mp3;base64,SUQzAwAAAAAAJlRJVDIAAAAXAAAAU291bmQgRWZmZWN0IC0gUG9wIAAVEVOQwAAAAEAAAAAAAAAAAAAAAAAAAAAAAD/+0TAAAAAsAAABAAECYAAAAEaaGFhcmIAAAAAUAAH4AAADC/////////8AAAIAAAAhMY2AAAAAAAAMyQ=='], volume: 0.4 })
+                tick: new Howl({ 
+                    src: ['sounds/tick.mp3'], 
+                    volume: 0.3,
+                    preload: true,
+                    onload: function() {
+                        console.log('Tick sound loaded successfully');
+                    },
+                    onloaderror: function(id, err) {
+                        console.error('Error loading tick sound:', err);
+                    }
+                }),
+                beep: new Howl({ 
+                    src: ['sounds/beep.mp3'], 
+                    volume: 0.5,
+                    preload: true,
+                    onload: function() {
+                        console.log('Beep sound loaded successfully');
+                    },
+                    onloaderror: function(id, err) {
+                        console.error('Error loading beep sound:', err);
+                    }
+                }),
+                lap: new Howl({ 
+                    src: ['sounds/lap.mp3'], 
+                    volume: 0.4,
+                    preload: true,
+                    onload: function() {
+                        console.log('Lap sound loaded successfully');
+                    },
+                    onloaderror: function(id, err) {
+                        console.error('Error loading lap sound:', err);
+                    }
+                })
             };
             console.log('Sound effects initialized.');
         } else {
@@ -184,15 +214,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Animation loop from the provided code
         function animateNew() {
             if (!animationIsRunning) return; // Use the dedicated animation state
 
             const elapsed = Date.now() - animationStartTime; // Keep elapsed for dot animation
 
-            // Removed line direction change logic
-
-            // Restore node animation logic
+            // Update dot positions
             for (let i = 0; i < lineCount; i++) {
                 const speed = 1 + (i * 0.15);
                 const progress = (elapsed / (120 / speed) + i * 20) % 280; // Cycle within 280px range
@@ -222,18 +249,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 let progress = ((elapsed * speed) % lineLength) / lineLength;
                 progress = (progress + offset / lineLength) % 1; // Wrap progress with offset
 
-                // Account for the line wrapper's position - REMOVED
-                // const wrapperProgress = ((elapsed % 8000) / 8000) * 80 - 40; // -40 to 40px
-                // const wrapperOffset = animationLineDirection > 0 ? wrapperProgress : -wrapperProgress; // REMOVED
-
                 // Calculate position on diagonal line
                 const lineX = -40 + progress * lineLength; // Position along the line's length
                 const lineY = 30 + lineIndex * 20; // Base Y position of the line
 
                 // Convert to absolute position considering rotation (Simplified)
                 const angleRad = 45 * (Math.PI / 180);
-                // const dotX = lineX * Math.cos(angleRad) - lineY * Math.sin(angleRad) + wrapperOffset; // REMOVED wrapperOffset
-                // const dotY = lineX * Math.sin(angleRad) + lineY * Math.cos(angleRad) + wrapperOffset; // REMOVED wrapperOffset
+
                 const dotX = lineX * Math.cos(angleRad) - lineY * Math.sin(angleRad); // Position without wrapper offset
                 const dotY = lineX * Math.sin(angleRad) + lineY * Math.cos(angleRad); // Position without wrapper offset
 
@@ -324,13 +346,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (timerTimeLeft > 0) {
                     timerTimeLeft--;
                     updateTimerDisplay();
-                    try { sounds.tick.play(); } catch (e) { console.error("Sound play error (tick):", e); }
+                    if (sounds.tick && typeof sounds.tick.play === 'function') {
+                        sounds.tick.play();
+                    }
                 } else {
                     clearInterval(timerInterval);
                     timerRunning = false;
                     timerStartBtn.style.display = 'inline-flex';
                     timerPauseBtn.style.display = 'none';
-                    try { sounds.beep.play(); } catch (e) { console.error("Sound play error (beep):", e); }
+                    if (sounds.beep && typeof sounds.beep.play === 'function') {
+                        sounds.beep.play();
+                    }
                     flashTimerComplete();
                     // Stop Animation only if stopwatch isn't also running
                     if (!stopwatchRunning) {
@@ -433,10 +459,16 @@ document.addEventListener('DOMContentLoaded', function() {
             startAnimationLoop();
 
             const startTime = Date.now() - stopwatchTime;
+            let lastSecond = Math.floor(stopwatchTime / 1000); // Track the last second
+            
             stopwatchInterval = setInterval(() => {
                 stopwatchTime = Date.now() - startTime;
                 updateStopwatchDisplay();
-                if (stopwatchTime % 1000 < 50) {
+                
+                // Play tick sound only when seconds change
+                const currentSecond = Math.floor(stopwatchTime / 1000);
+                if (currentSecond !== lastSecond) {
+                    lastSecond = currentSecond;
                     try { sounds.tick.play(); } catch (e) { console.error("Sound play error (stopwatch tick):", e); }
                 }
             }, 10);
@@ -510,7 +542,9 @@ document.addEventListener('DOMContentLoaded', function() {
             lapItem.classList.add('lap-item');
             lapItem.innerHTML = `<span class="lap-number">Lap ${lapCount}</span><span class="lap-time">${lapTime}</span>`;
             if (lapsContainer) lapsContainer.insertBefore(lapItem, lapsContainer.firstChild);
-            try { sounds.lap.play(); } catch (e) { console.error("Sound play error (lap):", e); }
+            if (sounds.lap && typeof sounds.lap.play === 'function') {
+                sounds.lap.play();
+            }
             lapItem.style.animation = 'contentFadeIn 0.3s forwards'; // Use existing fade-in
         }
     }
@@ -570,6 +604,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (stopwatchResetBtn) stopwatchResetBtn.addEventListener('click', resetStopwatch);
     if (stopwatchLapBtn) stopwatchLapBtn.addEventListener('click', recordLap);
 
+    // Add click sound to all buttons except lap button
+    const allButtons = document.querySelectorAll('button:not(#stopwatch-lap)');
+    allButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            try { sounds.beep.play(); } catch (e) { console.error("Sound play error (button click):", e); }
+        });
+    });
+    
     // Initialize displays
     updateTimerDisplay();
     updateStopwatchDisplay();
