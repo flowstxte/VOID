@@ -1,0 +1,1106 @@
+:root {
+    /* Modern Cyberpunk Theme */
+    --bg-primary: #050505; /* Slightly off-black */
+    --bg-secondary: #181818; /* Dark grey container */
+    --text-primary: #f0f0f0;
+    --text-secondary: #a0a0a0;
+    --accent: #ffffff; /* White accent */
+    --accent-glow: rgba(255, 255, 255, 0.2); /* White glow effect */
+    --control-bg: rgba(255, 255, 255, 0.03);
+    --control-hover: rgba(255, 255, 255, 0.1); /* Use white accent for hover */
+    --border-color: rgba(255, 255, 255, 0.15);
+    --pause-color: #ff4d4d;
+    --input-bg: #0f0f0f;
+    --transition-speed: 0.3s; /* Variable for transition speed */
+    --glow-intensity: 0 0 15px; /* Variable for glow effect */
+}
+
+/* Light Theme Definition (Refined) */
+.light-theme {
+    --bg-primary: #f0f0f0;
+    --bg-secondary: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --accent: #333333; /* Dark grey accent for light theme */
+    --accent-glow: rgba(51, 51, 51, 0.2); /* Dark grey glow */
+    --control-bg: rgba(0, 0, 0, 0.03);
+    --control-hover: rgba(51, 51, 51, 0.1); /* Use dark grey accent for hover */
+    --border-color: rgba(0, 0, 0, 0.15);
+    --pause-color: #cc0000;
+    --input-bg: #e8e8e8;
+    --transition-speed: 0.3s;
+    --glow-intensity: 0 0 15px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Audiowide', sans-serif; /* Use Audiowide */
+    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex; /* Changed to flex for wrapper */
+    justify-content: center;
+    align-items: center;
+    /* overflow: hidden; */ /* Removed to allow scrolling */
+    position: relative;
+}
+
+/* NEW: Main wrapper */
+.main-wrapper {
+    /* display: flex; */ /* Removed flex */
+    /* align-items: flex-start; */ /* Removed flex */
+    /* justify-content: center; */ /* Removed flex */
+    width: 100%;
+    max-width: 1100px; /* Adjusted max-width for grid */
+    padding: 2rem;
+}
+
+.container {
+    background-color: var(--bg-secondary);
+    padding: 2.5rem; /* Slightly more padding */
+    border-radius: 12px; /* More rounded corners */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35); /* Slightly stronger shadow */
+    /* width: 90%; */ /* Removed fixed width */
+    /* max-width: 600px; */ /* Removed max-width */
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    /* flex-shrink: 0; */ /* Removed flex property */
+    display: grid; /* Use Grid */
+    grid-template-columns: 1fr auto; /* App content takes available space, animation wrapper takes auto */
+    grid-template-areas: "app animation-wrapper"; /* Updated grid area name */
+    gap: 2rem; /* Gap between grid items */
+    align-items: start; /* Align items to the start of the grid area */
+}
+
+.header {
+    /* Positioned within animation-wrapper now */
+    text-align: center; /* Center align text */
+    margin-bottom: 1rem; /* Space below header */
+    width: 100%; /* Ensure it takes full width for centering */
+}
+
+.header h1 {
+    font-family: 'Audiowide', sans-serif; /* Use Audiowide */
+    font-size: 2.8rem; /* Slightly smaller */
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    letter-spacing: 1px;
+    text-transform: uppercase; /* Uppercase title */
+    color: var(--accent); /* Use accent color */
+    text-shadow: var(--glow-intensity) var(--accent-glow); /* Add glow */
+}
+
+.header p {
+    color: var(--text-secondary);
+    font-family: 'Audiowide', sans-serif; /* Use Audiowide */
+}
+
+.app-container {
+    position: relative;
+    grid-area: app; /* Assign to grid area */
+    max-width: 600px; /* Limit app container width */
+    width: 100%; /* Ensure it takes full width of its grid area */
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.tab-btn {
+    background: none;
+    color: var(--text-secondary);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px 8px 0 0; /* More rounded tab corners */
+    border-bottom: 3px solid transparent; /* Thicker underline */
+    font-family: 'Audiowide', sans-serif; /* Use Audiowide */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase; /* Uppercase tabs */
+    transition: all var(--transition-speed) ease;
+    margin: 0 0.5rem;
+    position: relative; /* For pseudo-element */
+    overflow: hidden; /* For pseudo-element */
+}
+
+.tab-btn::before { /* Add subtle hover effect */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: var(--accent);
+    transition: all var(--transition-speed) ease;
+    transform: translateX(-50%);
+}
+
+.tab-btn:hover::before {
+    width: 100%;
+}
+
+.tab-btn.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent);
+    text-shadow: var(--glow-intensity) var(--accent-glow); /* Glow for active tab */
+}
+
+.tab-btn.active::before {
+    width: 100%; /* Ensure underline shows on active */
+}
+
+.content {
+    display: none;
+    animation: contentFadeIn 0.6s ease forwards; /* Smoother fade */
+}
+
+.content.active {
+    display: block;
+}
+
+.time-display {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align boxes vertically */
+    /* gap: 0.5rem; */ /* Replaced gap with margins below */
+    font-family: 'Roboto Mono', monospace; /* Consistent monospace font */
+    font-size: 4.5rem; /* Larger time display */
+    font-weight: 500;
+    margin: 2rem 0 1.5rem 0; /* Adjust margins */
+    /* letter-spacing: 3px; */ /* Removed letter-spacing */
+    position: relative;
+    color: var(--text-primary);
+    transition: color var(--transition-speed), text-shadow var(--transition-speed); /* Add transition */
+}
+
+/* Style the individual time unit boxes */
+.time-unit {
+    background-color: rgba(255, 255, 255, 0.02); /* Very subtle background */
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Slightly more rounded time units */
+    padding: 0; /* Remove padding */
+    /* min-width: 80px; */ /* Removed fixed width */
+    text-align: center; /* Keep text-align for fallback */
+    margin: 0 0.25rem; /* Added margin to replace gap */
+    display: inline-flex; /* Use flex to center content */
+    justify-content: center; /* Center the inner span */
+    align-items: center; /* Vertically center */
+    line-height: 1; /* Ensure consistent line height */
+}
+
+.time-unit span { /* Target the number span inside */
+    display: inline-block; /* Ensure block-level properties like width apply */
+    /* min-width: 50px; */ /* Removed fixed width */
+    text-align: center; /* Ensure text stays centered within the span */
+    /* transition: color var(--transition-speed); */ /* Removed transition */
+}
+
+.time-display span.colon {
+    opacity: 0.7; /* Dim colon slightly */
+    /* margin: 0; */ /* Removed margin override */
+    animation: none; /* Ensure no blink */
+    margin: 0 0.25rem; /* Added margin to replace gap */
+}
+
+.presets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.preset-btn {
+    padding: 0.6rem 1.2rem;
+    background: var(--control-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* More rounded preset buttons */
+    font-family: 'Audiowide', sans-serif; /* Use Audiowide */
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    text-transform: uppercase; /* Uppercase presets */
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.preset-btn:hover {
+    background: var(--control-hover);
+    border-color: var(--accent);
+    box-shadow: var(--glow-intensity) var(--accent-glow); /* Add glow on hover */
+}
+
+.preset-btn.active {
+    background: var(--accent);
+    color: var(--bg-secondary); /* Use secondary bg for contrast */
+    border-color: var(--accent);
+    box-shadow: var(--glow-intensity) var(--accent-glow); /* Add glow */
+}
+
+/* Styles for the custom time input section */
+.custom-time-input {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align groups and colons */
+    gap: 0.5rem; /* Revert gap */
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.custom-time-input input {
+    width: 60px; /* Slightly wider */
+    padding: 0.6rem; /* More padding */
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 1.1rem; /* Larger font */
+    font-family: 'Roboto Mono', monospace; /* Keep Roboto Mono */
+    border-radius: 8px; /* More rounded inputs */
+    -moz-appearance: textfield;
+    appearance: textfield;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.custom-time-input input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: var(--glow-intensity) var(--accent-glow);
+}
+
+.custom-time-input input::-webkit-outer-spin-button,
+.custom-time-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.custom-time-input span {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.custom-time-input button {
+    padding: 0.5rem 1rem;
+    background: var(--control-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* More rounded set button */
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    font-size: 0.9rem;
+    font-family: 'Audiowide', sans-serif; /* Use Audiowide */
+    text-transform: uppercase; /* Uppercase button */
+    font-weight: 600;
+    margin-left: 0.5rem; /* Revert spacing for Set button */
+}
+
+.custom-time-input button:hover {
+    background: var(--control-hover);
+    border-color: var(--accent);
+    box-shadow: var(--glow-intensity) var(--accent-glow); /* Add glow */
+}
+
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem; /* Adjusted margin */
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Circular buttons */
+    border: 2px solid var(--border-color); /* Thicker border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.6rem; /* Slightly larger icon */
+    transition: all var(--transition-speed) ease;
+    background: var(--control-bg); /* Subtle background */
+    color: var(--text-secondary); /* Dimmer icon color */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+
+.control-btn:hover {
+    transform: scale(1.05) translateY(-2px); /* Subtle lift and scale */
+    background: var(--control-hover);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: var(--glow-intensity) var(--accent-glow), 0 4px 10px rgba(0,0,0,0.3); /* Glow and larger shadow */
+}
+
+/* Remove specific background colors for start/pause */
+/* .control-btn.start, .control-btn.resume { ... } */
+/* .control-btn.pause { ... } */
+
+.laps {
+    margin-top: 2rem;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.lap-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 1rem; /* Adjust padding */
+    border-radius: 8px; /* More rounded lap items */
+    background: rgba(255, 255, 255, 0.02); /* Very subtle background */
+    border: 1px solid var(--border-color);
+    margin-bottom: 0.7rem; /* More spacing */
+    transition: background-color var(--transition-speed);
+}
+
+.lap-item:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.lap-number {
+    color: var(--text-secondary);
+}
+
+.lap-time {
+    font-weight: 600;
+    font-family: 'Roboto Mono', monospace; /* Keep Roboto Mono */
+    color: var(--accent);
+}
+
+/* Style the paused time display directly */
+#timer-display.paused,
+#stopwatch-display.paused {
+    opacity: 0.9;
+    transition: opacity var(--transition-speed);
+}
+
+.app-container.paused-state .time-unit {
+    border-color: var(--pause-color) !important; /* Force red border */
+    background-color: rgba(255, 77, 77, 0.05); /* Faint red background */
+}
+
+/* Ensure the number itself is red when paused */
+.app-container.paused-state .time-display span {
+    color: var(--pause-color) !important; /* Force red color */
+    text-shadow: 0 0 10px var(--pause-color); /* Red glow */
+    animation: none; /* Stop any running animation */
+    opacity: 0.9;
+    transition: color var(--transition-speed), text-shadow var(--transition-speed); /* Ensure transition */
+}
+
+/* Ticking animation removed */
+
+/* Theme toggle */
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.4rem; /* Larger icon */
+    transition: all var(--transition-speed) ease;
+    z-index: 100;
+    padding: 8px; /* More padding for easier clicking */
+    border-radius: 50%;
+}
+
+.theme-toggle:hover {
+    color: var(--accent);
+    transform: rotate(20deg) scale(1.1);
+    text-shadow: var(--glow-intensity) var(--accent-glow);
+}
+
+/* Timer progress circle (Removed) */
+
+/* Animations */
+@keyframes breathingGlow {
+    0%, 100% {
+        text-shadow: 0 0 5px var(--accent-glow);
+        opacity: 0.8;
+    }
+    50% {
+        text-shadow: var(--glow-intensity) var(--accent-glow);
+        opacity: 1;
+    }
+}
+
+/* Apply breathing glow only to the TIMER display when running */
+#timer .time-display.running {
+    animation: breathingGlow 2.5s infinite ease-in-out;
+    color: var(--accent); /* Highlight running time */
+}
+
+/* Stopwatch display should not animate when running */
+#stopwatch .time-display.running {
+    color: var(--accent); /* Highlight running time but no animation */
+    animation: none;
+}
+
+@keyframes contentFadeIn { /* Refined fade-in */
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Removed old fadeIn */
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--input-bg); /* Use input background for track */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-secondary);
+    border-radius: 5px;
+    border: 1px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+    box-shadow: var(--glow-intensity) var(--accent-glow);
+}
+
+/* --- Paused State Styles --- */
+/* Re-add general container red border on pause if desired, or keep specific */
+/* For now, let's keep it specific to elements within */
+/* .app-container.paused-state .container { ... } */
+
+/* Paused Time Display (Timer & Stopwatch) */
+.app-container.paused-state #timer .time-display,
+.app-container.paused-state #stopwatch .time-display {
+    color: var(--pause-color) !important;
+    text-shadow: 0 0 10px var(--pause-color);
+    animation: none;
+}
+/* Also apply to the individual spans within */
+.app-container.paused-state #timer .time-display span,
+.app-container.paused-state #stopwatch .time-display span {
+     color: var(--pause-color) !important;
+     text-shadow: 0 0 10px var(--pause-color);
+     animation: none;
+}
+/* Paused Time Unit Borders */
+.app-container.paused-state #timer .time-unit,
+.app-container.paused-state #stopwatch .time-unit {
+    border-color: var(--pause-color) !important;
+    background-color: rgba(255, 77, 77, 0.05);
+}
+
+/* Paused Active Tab (Timer & Stopwatch) */
+.app-container.paused-state #timer ~ .tabs .tab-btn.active[data-tab="timer"],
+.app-container.paused-state #stopwatch ~ .tabs .tab-btn.active[data-tab="stopwatch"] {
+    border-bottom-color: var(--pause-color);
+    text-shadow: 0 0 10px var(--pause-color);
+}
+.app-container.paused-state #timer ~ .tabs .tab-btn.active[data-tab="timer"]::before,
+.app-container.paused-state #stopwatch ~ .tabs .tab-btn.active[data-tab="stopwatch"]::before {
+    background-color: var(--pause-color);
+}
+
+/* Paused Control Buttons (Timer & Stopwatch) */
+.app-container.paused-state #timer .control-btn,
+.app-container.paused-state #stopwatch .control-btn {
+    border-color: var(--pause-color) !important;
+    color: var(--pause-color) !important;
+}
+
+/* Paused Control Buttons Hover (Timer & Stopwatch) */
+.app-container.paused-state #timer .control-btn:hover,
+.app-container.paused-state #stopwatch .control-btn:hover {
+    color: var(--pause-color) !important;
+    border-color: var(--pause-color) !important;
+    background: rgba(255, 77, 77, 0.1);
+    box-shadow: 0 0 10px var(--pause-color), 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Paused Laps Scrollbar (Stopwatch specific) */
+.app-container.paused-state #stopwatch .laps::-webkit-scrollbar-thumb {
+    background: var(--pause-color);
+}
+.app-container.paused-state #stopwatch .laps::-webkit-scrollbar-thumb:hover {
+    background: var(--pause-color);
+    box-shadow: 0 0 8px var(--pause-color);
+    color: var(--pause-color) !important;
+    border-color: var(--pause-color) !important;
+    background: rgba(255, 77, 77, 0.1);
+    box-shadow: 0 0 10px var(--pause-color), 0 4px 10px rgba(0,0,0,0.3);
+}
+/* Paused Laps Scrollbar (Stopwatch specific) */
+.app-container.paused-state #stopwatch .laps::-webkit-scrollbar-thumb {
+    background: var(--pause-color);
+}
+
+.app-container.paused-state #stopwatch .laps::-webkit-scrollbar-thumb:hover {
+    background: var(--pause-color);
+    box-shadow: 0 0 8px var(--pause-color);
+}
+
+/* --- Flashing State (Timer Complete) --- */
+.time-display.flashing {
+    opacity: 0.5;
+    color: var(--accent); /* Use accent color during flash */
+    text-shadow: none; /* Remove glow during flash for contrast */
+}
+
+/* Responsive design */
+/* Tablet and smaller desktops */
+@media (max-width: 1100px) {
+    .main-wrapper {
+        padding: 1.5rem;
+    }
+}
+
+/* Tablet Portrait / Large Phones */
+@media (max-width: 950px) {
+    .container {
+        grid-template-columns: 1fr; /* Stack elements */
+        grid-template-areas:
+            "app"
+            "animation-wrapper"; /* Updated grid area name */
+        justify-items: center; /* Center items horizontally */
+        gap: 3rem; /* Increase gap when stacked */
+        padding: 2rem; /* Adjust padding */
+    }
+    .app-container {
+        max-width: 600px; /* Maintain max-width for app */
+        width: 90%; /* Allow some horizontal space */
+    }
+    .animation-wrapper {
+        align-items: center; /* Center align items when stacked */
+        width: 100%; /* Take full width */
+    }
+    /* Header already centered */
+    .copyright {
+        text-align: center; /* Center copyright */
+    }
+    .animation-container {
+        margin-top: 0; /* Remove top margin, use grid gap */
+        width: 300px; /* Slightly smaller animation when stacked */
+        height: 300px;
+    }
+    .animation-container .frame {
+        width: 200px; /* Adjust frame size */
+        height: 200px;
+    }
+}
+
+/* Smaller Tablets / Phones Landscape */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+        width: 95%; /* Allow container to shrink */
+    }
+    .header h1 {
+        font-size: 2.4rem;
+    }
+    .time-display {
+        font-size: 3.5rem; /* Adjust font size */
+    }
+    .control-btn {
+        width: 55px; /* Slightly smaller controls */
+        height: 55px;
+        font-size: 1.5rem;
+    }
+    .presets {
+        gap: 0.8rem;
+    }
+    .preset-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    .custom-time-input input {
+        width: 55px;
+        font-size: 1rem;
+    }
+    .custom-time-input button {
+        font-size: 0.85rem;
+    }
+    .animation-container {
+        width: 280px; /* Further reduce animation size */
+        height: 280px;
+    }
+    .animation-container .frame {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Phones Portrait */
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem; /* Less padding */
+    }
+    .header h1 {
+        font-size: 2rem;
+    }
+    .time-display {
+        font-size: 2.8rem; /* Adjust font size */
+    }
+    .time-unit {
+        margin: 0 0.15rem;
+    }
+    .time-display span.colon {
+        margin: 0 0.15rem;
+    }
+    .tab-btn {
+        padding: 0.6rem 0.8rem; /* Less padding */
+        font-size: 0.85rem;
+        margin: 0 0.3rem;
+    }
+    .presets {
+        gap: 0.5rem;
+    }
+    .preset-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    .custom-time-input {
+        gap: 0.3rem;
+    }
+    .custom-time-input input {
+        width: 45px; /* Smaller inputs */
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+     .custom-time-input button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    .controls {
+        gap: 0.8rem;
+    }
+    .control-btn {
+        width: 50px; /* Keep controls reasonably sized */
+        height: 50px;
+        font-size: 1.4rem;
+    }
+    .lap-item {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    .animation-container {
+        width: 240px; /* Smallest animation size */
+        height: 240px;
+    }
+    .animation-container .frame {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Add this to your existing CSS file */
+/* Styles for consistent width digits (font-family inherited from .time-display) */
+#timer-hours,
+#timer-minutes,
+#timer-seconds,
+#stopwatch-minutes,
+#stopwatch-seconds,
+#stopwatch-milliseconds {
+  display: inline-block; /* Needed for width */
+  width: 2ch; /* Fixed width based on character count (2 characters wide) */
+  text-align: center; /* Center digits within the 2ch width */
+}
+
+/* Remove stopwatch-specific time-unit width override as it's handled by inner span now */
+/*
+#stopwatch .time-unit {
+  width: 80px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+*/
+
+/* Ensure the time display maintains its structure */
+#stopwatch-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* Ensure colons have fixed width too */
+#stopwatch-display .colon {
+  width: 10px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Add these styles to enhance the paused state for stopwatch */
+.control-btn.pause.paused {
+    background-color: rgba(255, 77, 77, 0.2);
+    border-color: var(--pause-color);
+    color: var(--pause-color);
+    box-shadow: 0 0 10px var(--pause-color);
+}
+
+/* Enhance the existing paused state styles to ensure they work properly */
+.app-container.paused-state #stopwatch .time-display {
+    color: var(--pause-color) !important;
+    text-shadow: 0 0 10px var(--pause-color);
+    animation: none;
+}
+
+.app-container.paused-state #stopwatch .time-unit {
+    border-color: var(--pause-color) !important;
+    background-color: rgba(255, 77, 77, 0.05);
+}
+
+/* Add a pulsing effect for the paused stopwatch */
+@keyframes pausePulse {
+    0%, 100% {
+        opacity: 0.8;
+        text-shadow: 0 0 5px var(--pause-color);
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 15px var(--pause-color);
+    }
+}
+
+/* Make stopwatch time display red when paused - more specific selectors */
+.app-container.paused-state #stopwatch .time-display,
+.app-container.paused-state #stopwatch-display {
+    color: var(--pause-color) !important;
+    text-shadow: 0 0 10px var(--pause-color) !important;
+    animation: pausePulse 2s infinite ease-in-out !important;
+}
+
+/* Target the specific span elements inside the stopwatch display */
+.app-container.paused-state #stopwatch-minutes,
+.app-container.paused-state #stopwatch-seconds,
+.app-container.paused-state #stopwatch-milliseconds {
+    color: var(--pause-color) !important;
+    text-shadow: 0 0 10px var(--pause-color) !important;
+}
+
+/* Make sure the colons also turn red */
+.app-container.paused-state #stopwatch .time-display .colon {
+    color: var(--pause-color) !important;
+    text-shadow: 0 0 10px var(--pause-color) !important;
+}
+
+/* Ensure the time unit boxes have red borders */
+.app-container.paused-state #stopwatch .time-unit {
+    border-color: var(--pause-color) !important;
+    background-color: rgba(255, 77, 77, 0.05) !important;
+}
+
+/* Define the pausePulse animation if it doesn't exist yet */
+@keyframes pausePulse {
+    0%, 100% {
+        opacity: 0.8;
+        text-shadow: 0 0 5px var(--pause-color);
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 15px var(--pause-color);
+    }
+}
+
+/* Add this to your existing CSS file */
+.control-btn.paused-control {
+    border-color: var(--pause-color) !important;
+    color: var(--pause-color) !important;
+    background-color: rgba(255, 77, 77, 0.1);
+}
+
+.control-btn.paused-control:hover {
+    background-color: rgba(255, 77, 77, 0.2);
+    box-shadow: 0 0 10px var(--pause-color), 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Direct targeting of stopwatch elements when paused */
+.app-container.paused-state #stopwatch-minutes,
+.app-container.paused-state #stopwatch-seconds,
+.app-container.paused-state #stopwatch-milliseconds {
+    color: var(--pause-color) !important;
+    text-shadow: 0 0 10px var(--pause-color) !important;
+}
+
+/* Target the time unit boxes directly */
+.app-container.paused-state #stopwatch .time-unit {
+    border-color: var(--pause-color) !important;
+    background-color: rgba(255, 77, 77, 0.05) !important;
+}
+
+/* Target the colons directly */
+.app-container.paused-state #stopwatch .colon {
+    color: var(--pause-color) !important;
+}
+
+/* Ensure the entire stopwatch display has the right styling */
+.app-container.paused-state #stopwatch-display {
+    color: var(--pause-color) !important;
+}
+
+/* --- START: NEW Animation Styles --- */
+
+/* Wrapper for animation, header, and copyright */
+.animation-wrapper {
+    grid-area: animation-wrapper; /* Assign to grid area */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+    position: relative; /* For copyright positioning */
+    height: 100%; /* Take full height of grid cell */
+    justify-content: space-between; /* Space out header, animation, copyright */
+    padding: 1rem 0; /* Add some vertical padding */
+}
+
+.animation-container {
+    position: relative;
+    width: 350px; /* Increased size */
+    height: 350px; /* Increased size */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.animation-container .frame {
+    position: relative;
+    width: 250px; /* Increased size */
+    height: 250px; /* Increased size */
+    border: 1px solid var(--border-color); /* Use theme variable */
+    box-sizing: border-box;
+    transition: border-color 1s ease;
+    /* transform-style: preserve-3d; */ /* Removed as mouse interaction is gone */
+    transform: none !important; /* Ensure no transform is applied */
+}
+.animation-container .frame:hover {
+    border-color: var(--accent); /* Use theme variable */
+}
+
+.animation-container .dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.animation-container .dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.7); /* Use specific color from new anim */
+    border-radius: 50%;
+    transition: all 0.5s ease;
+}
+
+.animation-container .dot.pulse {
+    animation: pulseDot 2s infinite alternate;
+}
+
+@keyframes pulseDot {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+.animation-container .lines-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.animation-container .line-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* animation: moveDiagonal 8s ease-in-out infinite; */ /* Removed animation */
+}
+
+/* @keyframes moveDiagonal removed */
+
+.animation-container .line {
+    position: absolute;
+    height: 1px;
+    background-color: var(--accent); /* Use theme variable */
+    transform-origin: 0 50%;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.animation-container .line.glow {
+    animation: glowLine 3s infinite alternate;
+}
+
+/* Renamed glowLine to pulseLine and adjusted effect */
+@keyframes glowLine {
+    0% {
+        opacity: 0.5;
+        height: 1px;
+        box-shadow: 0 0 2px var(--accent-glow); /* Use theme variable */
+    }
+    100% {
+        opacity: 1;
+        height: 1.5px;
+        box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 60%, transparent); /* Use theme variable */
+    }
+}
+
+/* Restore .node styles */
+.animation-container .node {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--accent); /* Use theme variable */
+    background-color: transparent;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.animation-container .node.active {
+    background-color: var(--accent-glow); /* Use theme variable */
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 50%, transparent); /* Use theme variable */
+}
+
+
+.animation-container .background-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px; /* Match new anim */
+    height: 200px; /* Match new anim */
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 70%); /* Use theme variable */
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: -1;
+    animation: pulseGlow 4s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.1;
+        width: 200px;
+        height: 200px;
+    }
+    100% {
+        opacity: 0.3;
+        width: 240px;
+        height: 240px;
+    }
+}
+
+/* Removed .sliding-dot styles as element is no longer created */
+/* Restore .sliding-dot styles */
+.animation-container .sliding-dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: color-mix(in srgb, var(--accent) 90%, transparent); /* Use theme variable */
+    border-radius: 50%;
+    box-shadow: 0 0 5px color-mix(in srgb, var(--accent) 50%, transparent); /* Use theme variable */
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+
+/* --- END: NEW Animation Styles --- */
+
+
+/* Copyright Styles */
+.copyright {
+    /* position: absolute; */ /* Removed absolute positioning */
+    /* bottom: 0; */ /* Removed */
+    /* right: 0; */ /* Removed */
+    margin-top: 1rem; /* Space above copyright */
+    width: 100%; /* Take full width of wrapper */
+    text-align: right; /* Align text to the right */
+}
+
+.copyright p {
+    font-size: 0.9rem; /* Slightly larger */
+    font-family: 'Roboto Mono', monospace; /* Change font */
+    color: var(--text-secondary);
+    opacity: 0.7;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, color 0.3s ease-out, text-shadow 0.3s ease-out; /* Add transition for hover */
+}
+
+/* Remove Floating Animation */
+/* @keyframes floatAnimation { ... } */
+
+/* New Hover Animation: Color Shift + Underline */
+.header h1,
+.header p,
+.copyright p {
+    position: relative; /* Needed for pseudo-element */
+    display: inline-block; /* Ensure underline fits content */
+    padding-bottom: 2px; /* Space for underline */
+    transition: color var(--transition-speed), opacity var(--transition-speed); /* Add base transition */
+}
+
+.header h1::after,
+.header p::after,
+.copyright p::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px; /* Thin underline */
+    background-color: var(--accent);
+    transition: width 0.3s ease-out;
+}
+
+.header h1:hover,
+.header p:hover,
+.copyright p:hover {
+    opacity: 1; /* Increase opacity */
+    color: var(--accent); /* Change color to accent */
+    /* text-shadow: none; */ /* Remove any previous shadow if needed */
+}
+
+.header h1:hover::after,
+.header p:hover::after,
+.copyright p:hover::after {
+    width: 100%; /* Expand underline on hover */
+}
+
+/* Removed redundant media query block here as it's handled above */
+
+/* --- END: Animation Styles --- */

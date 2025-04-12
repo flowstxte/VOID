@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOID</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-wrapper"> <!-- Added wrapper -->
+        <div class="container">
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+
+            <!-- Header moved to animation side -->
+
+            <div class="app-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="timer">Timer</button>
+                    <button class="tab-btn" data-tab="stopwatch">Stopwatch</button>
+                </div>
+
+                <!-- Timer Tab -->
+                <div class="content active" id="timer">
+                    <div class="time-display" id="timer-display">
+                        <div class="time-unit"><span id="timer-hours">00</span></div>
+                        <span class="colon">:</span>
+                        <div class="time-unit"><span id="timer-minutes">25</span></div>
+                        <span class="colon">:</span>
+                        <div class="time-unit"><span id="timer-seconds">00</span></div>
+                    </div>
+
+                    <div class="presets">
+                        <button class="preset-btn" data-time="300">5 min</button>
+                        <button class="preset-btn" data-time="600">10 min</button>
+                        <button class="preset-btn" data-time="900">15 min</button>
+                        <button class="preset-btn" data-time="1500">25 min</button>
+                        <button class="preset-btn" data-time="3000">50 min</button>
+                    </div>
+                    <div class="custom-time-input">
+                        <input type="number" id="custom-hours" placeholder="HH" min="0" max="99" value="0">
+                        <span>:</span>
+                        <input type="number" id="custom-minutes" placeholder="MM" min="0" max="59" value="25">
+                        <span>:</span>
+                        <input type="number" id="custom-seconds" placeholder="SS" min="0" max="59" value="0">
+                        <button id="set-custom-time">Set</button>
+                    </div>
+
+                    <div class="controls">
+                        <button class="control-btn start" id="timer-start">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn pause" id="timer-pause" style="display: none;">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button class="control-btn reset" id="timer-reset">
+                            <i class="fas fa-redo-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stopwatch Tab -->
+                <div class="content" id="stopwatch">
+                    <div class="time-display" id="stopwatch-display">
+                        <div class="time-unit"><span id="stopwatch-minutes">00</span></div>
+                        <span class="colon">:</span>
+                        <div class="time-unit"><span id="stopwatch-seconds">00</span></div>
+                        <span class="colon">.</span>
+                        <div class="time-unit"><span id="stopwatch-milliseconds">00</span></div>
+                    </div>
+
+                    <div class="controls">
+                        <button class="control-btn start" id="stopwatch-start">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn pause" id="stopwatch-pause" style="display: none;">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button class="control-btn" id="stopwatch-lap">
+                            <i class="fas fa-flag"></i>
+                        </button>
+                        <button class="control-btn reset" id="stopwatch-reset">
+                            <i class="fas fa-redo-alt"></i>
+                        </button>
+                    </div>
+
+                    <div class="laps" id="laps-container">
+                        <!-- Lap times will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animation Container -->
+            <div class="animation-wrapper"> <!-- New wrapper for animation + header + copyright -->
+                <div class="header">
+                    <h1>Void</h1>
+                    <p>TEMPORAL INTERFACE</p>
+                </div>
+                <div class="animation-container">
+                    <div class="background-glow"></div> <!-- Keep this -->
+                    <div class="frame" id="frame"> <!-- Use ID from new code -->
+                        <div class="dots" id="dots"></div> <!-- Use ID from new code -->
+                        <div class="lines-container" id="lines-container"></div> <!-- Use ID from new code -->
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; flowstxte</p> <!-- Added copyright -->
+                </div>
+            </div>
+        </div> <!-- End of .container -->
+    </div> <!-- End of .main-wrapper -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
