@@ -47,15 +47,15 @@ body {
     display: flex; /* Changed to flex for wrapper */
     justify-content: center;
     align-items: center;
-    /* overflow: hidden; */ /* Removed to allow scrolling */
+    /* overflow: hidden; */
     position: relative;
 }
 
 /* NEW: Main wrapper */
 .main-wrapper {
-    /* display: flex; */ /* Removed flex */
-    /* align-items: flex-start; */ /* Removed flex */
-    /* justify-content: center; */ /* Removed flex */
+    /* display: flex; */
+    /* align-items: flex-start; */
+    /* justify-content: center; */
     width: 100%;
     max-width: 1100px; /* Adjusted max-width for grid */
     padding: 2rem;
@@ -67,12 +67,12 @@ body {
     border-radius: 12px; /* More rounded corners */
     border: 1px solid var(--border-color);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35); /* Slightly stronger shadow */
-    /* width: 90%; */ /* Removed fixed width */
-    /* max-width: 600px; */ /* Removed max-width */
+    /* width: 90%; */ 
+    /* max-width: 600px; */ 
     position: relative;
     overflow: hidden;
     z-index: 10;
-    /* flex-shrink: 0; */ /* Removed flex property */
+    /* flex-shrink: 0; */
     display: grid; /* Use Grid */
     grid-template-columns: 1fr auto; /* App content takes available space, animation wrapper takes auto */
     grid-template-areas: "app animation-wrapper"; /* Updated grid area name */
@@ -178,7 +178,7 @@ body {
     font-size: 4.5rem; /* Larger time display */
     font-weight: 500;
     margin: 2rem 0 1.5rem 0; /* Adjust margins */
-    /* letter-spacing: 3px; */ /* Removed letter-spacing */
+    /* letter-spacing: 3px; */
     position: relative;
     color: var(--text-primary);
     transition: color var(--transition-speed), text-shadow var(--transition-speed); /* Add transition */
@@ -189,8 +189,8 @@ body {
     background-color: rgba(255, 255, 255, 0.02); /* Very subtle background */
     border: 1px solid var(--border-color);
     border-radius: 6px; /* Slightly more rounded time units */
-    padding: 0; /* Remove padding */
-    /* min-width: 80px; */ /* Removed fixed width */
+    padding: 0;
+    /* min-width: 80px; */
     text-align: center; /* Keep text-align for fallback */
     margin: 0 0.25rem; /* Added margin to replace gap */
     display: inline-flex; /* Use flex to center content */
@@ -201,14 +201,14 @@ body {
 
 .time-unit span { /* Target the number span inside */
     display: inline-block; /* Ensure block-level properties like width apply */
-    /* min-width: 50px; */ /* Removed fixed width */
+    /* min-width: 50px; */
     text-align: center; /* Ensure text stays centered within the span */
-    /* transition: color var(--transition-speed); */ /* Removed transition */
+    /* transition: color var(--transition-speed); */
 }
 
 .time-display span.colon {
     opacity: 0.7; /* Dim colon slightly */
-    /* margin: 0; */ /* Removed margin override */
+    /* margin: 0; */
     animation: none; /* Ensure no blink */
     margin: 0 0.25rem; /* Added margin to replace gap */
 }
@@ -343,7 +343,6 @@ body {
     box-shadow: var(--glow-intensity) var(--accent-glow), 0 4px 10px rgba(0,0,0,0.3); /* Glow and larger shadow */
 }
 
-/* Remove specific background colors for start/pause */
 /* .control-btn.start, .control-btn.resume { ... } */
 /* .control-btn.pause { ... } */
 
@@ -400,8 +399,6 @@ body {
     transition: color var(--transition-speed), text-shadow var(--transition-speed); /* Ensure transition */
 }
 
-/* Ticking animation removed */
-
 /* Theme toggle */
 .theme-toggle {
     position: absolute;
@@ -424,8 +421,6 @@ body {
     transform: rotate(20deg) scale(1.1);
     text-shadow: var(--glow-intensity) var(--accent-glow);
 }
-
-/* Timer progress circle (Removed) */
 
 /* Animations */
 @keyframes breathingGlow {
@@ -461,7 +456,6 @@ body {
         transform: translateY(0);
     }
 }
-/* Removed old fadeIn */
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
@@ -563,7 +557,7 @@ body {
 .time-display.flashing {
     opacity: 0.5;
     color: var(--accent); /* Use accent color during flash */
-    text-shadow: none; /* Remove glow during flash for contrast */
+    text-shadow: none;
 }
 
 /* Responsive design */
@@ -598,7 +592,7 @@ body {
         text-align: center; /* Center copyright */
     }
     .animation-container {
-        margin-top: 0; /* Remove top margin, use grid gap */
+        margin-top: 0;
         width: 300px; /* Slightly smaller animation when stacked */
         height: 300px;
     }
@@ -725,7 +719,6 @@ body {
   text-align: center; /* Center digits within the 2ch width */
 }
 
-/* Remove stopwatch-specific time-unit width override as it's handled by inner span now */
 /*
 #stopwatch .time-unit {
   width: 80px;
@@ -892,7 +885,7 @@ body {
     border: 1px solid var(--border-color); /* Use theme variable */
     box-sizing: border-box;
     transition: border-color 1s ease;
-    /* transform-style: preserve-3d; */ /* Removed as mouse interaction is gone */
+    /* transform-style: preserve-3d; */
     transform: none !important; /* Ensure no transform is applied */
 }
 .animation-container .frame:hover {
@@ -948,10 +941,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* animation: moveDiagonal 8s ease-in-out infinite; */ /* Removed animation */
+    /* animation: moveDiagonal 8s ease-in-out infinite; */
 }
-
-/* @keyframes moveDiagonal removed */
 
 .animation-container .line {
     position: absolute;
@@ -1026,8 +1017,6 @@ body {
     }
 }
 
-/* Removed .sliding-dot styles as element is no longer created */
-/* Restore .sliding-dot styles */
 .animation-container .sliding-dot {
     position: absolute;
     width: 4px;
@@ -1045,9 +1034,7 @@ body {
 
 /* Copyright Styles */
 .copyright {
-    /* position: absolute; */ /* Removed absolute positioning */
-    /* bottom: 0; */ /* Removed */
-    /* right: 0; */ /* Removed */
+    /* position: absolute; */
     margin-top: 1rem; /* Space above copyright */
     width: 100%; /* Take full width of wrapper */
     text-align: right; /* Align text to the right */
@@ -1060,8 +1047,6 @@ body {
     opacity: 0.7;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out, color 0.3s ease-out, text-shadow 0.3s ease-out; /* Add transition for hover */
 }
-
-/* Remove Floating Animation */
 /* @keyframes floatAnimation { ... } */
 
 /* New Hover Animation: Color Shift + Underline */
@@ -1092,7 +1077,7 @@ body {
 .copyright p:hover {
     opacity: 1; /* Increase opacity */
     color: var(--accent); /* Change color to accent */
-    /* text-shadow: none; */ /* Remove any previous shadow if needed */
+    /* text-shadow: none; */
 }
 
 .header h1:hover::after,
@@ -1100,7 +1085,4 @@ body {
 .copyright p:hover::after {
     width: 100%; /* Expand underline on hover */
 }
-
-/* Removed redundant media query block here as it's handled above */
-
 /* --- END: Animation Styles --- */
