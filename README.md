@@ -1,6 +1,6 @@
 # VOID - Temporal Interface
 
-VOID is a modern, cyberpunk-themed time management application featuring both a timer and stopwatch with a sleek, animated interface.
+VOID is a modern, futuristic-themed time management application featuring both a timer and stopwatch with a sleek, animated interface.
 
 ## Screenshots
 
