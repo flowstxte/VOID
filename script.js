@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const stopwatchResetBtn = document.getElementById('stopwatch-reset');
     const lapsContainer = document.getElementById('laps-container');
 
-    // Theme Toggle
+    // Top Controls
     const themeToggle = document.getElementById('theme-toggle');
+    const muteToggle = document.getElementById('mute-toggle');
 
     // Timer Variables
     let timerInterval;
@@ -47,8 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let stopwatchRunning = false;
     let lapCount = 0;
 
-    // Sound Effects
+    // Sound Effects & Mute State
     let sounds = {};
+    let isMuted = false; // Start with sound enabled
     try {
         if (typeof Howl !== 'undefined') {
             console.log('Initializing sound effects...');
@@ -90,11 +92,22 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Sound effects initialized.');
         } else {
             console.error("Howler.js not loaded. Sound effects disabled.");
-            sounds = { tick: { play: () => {} }, beep: { play: () => {} }, lap: { play: () => {} } };
+            sounds = { tick: { play: () => {} }, beep: { play: () => {} }, lap: { play: () => {} } }; // Null sound objects
         }
     } catch (error) {
         console.error("Error initializing sound effects:", error);
-        sounds = { tick: { play: () => {} }, beep: { play: () => {} }, lap: { play: () => {} } };
+        sounds = { tick: { play: () => {} }, beep: { play: () => {} }, lap: { play: () => {} } }; // Null sound objects
+    }
+
+    // Function to play sound only if not muted
+    function playSound(soundName) {
+        if (!isMuted && sounds[soundName] && typeof sounds[soundName].play === 'function') {
+            try {
+                sounds[soundName].play();
+            } catch (e) {
+                console.error(`Sound play error (${soundName}):`, e);
+            }
+        }
     }
 
     // Theme toggle functionality
@@ -107,6 +120,23 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
             }
+        });
+    }
+
+    // Mute toggle functionality
+    if (muteToggle) {
+        muteToggle.addEventListener('click', function() {
+            console.log('Mute toggle clicked');
+            isMuted = !isMuted;
+            if (isMuted) {
+                muteToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                // Optionally stop all currently playing sounds if needed
+                // Howler.stop(); // Uncomment if you want to stop sounds immediately
+            } else {
+                muteToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+                playSound('beep'); // Play a sound to confirm unmute
+            }
+            console.log('Muted state:', isMuted);
         });
     }
 
@@ -346,16 +376,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (timerTimeLeft > 0) {
                     timerTimeLeft--;
                     updateTimerDisplay();
-                    if (sounds.tick && typeof sounds.tick.play === 'function') {
-                        sounds.tick.play();
+                    if (!isMuted && sounds.tick && typeof sounds.tick.play === 'function') { // Check mute state
+                        playSound('tick');
                     }
                 } else {
                     clearInterval(timerInterval);
                     timerRunning = false;
                     timerStartBtn.style.display = 'inline-flex';
                     timerPauseBtn.style.display = 'none';
-                    if (sounds.beep && typeof sounds.beep.play === 'function') {
-                        sounds.beep.play();
+                    if (!isMuted && sounds.beep && typeof sounds.beep.play === 'function') { // Check mute state
+                        playSound('beep');
                     }
                     flashTimerComplete();
                     // Stop Animation only if stopwatch isn't also running
@@ -469,7 +499,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const currentSecond = Math.floor(stopwatchTime / 1000);
                 if (currentSecond !== lastSecond) {
                     lastSecond = currentSecond;
-                    try { sounds.tick.play(); } catch (e) { console.error("Sound play error (stopwatch tick):", e); }
+                    playSound('tick'); // Use playSound function
                 }
             }, 10);
         }
@@ -542,8 +572,8 @@ document.addEventListener('DOMContentLoaded', function() {
             lapItem.classList.add('lap-item');
             lapItem.innerHTML = `<span class="lap-number">Lap ${lapCount}</span><span class="lap-time">${lapTime}</span>`;
             if (lapsContainer) lapsContainer.insertBefore(lapItem, lapsContainer.firstChild);
-            if (sounds.lap && typeof sounds.lap.play === 'function') {
-                sounds.lap.play();
+            if (!isMuted && sounds.lap && typeof sounds.lap.play === 'function') { // Check mute state
+                playSound('lap');
             }
             lapItem.style.animation = 'contentFadeIn 0.3s forwards'; // Use existing fade-in
         }
@@ -608,7 +638,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const allButtons = document.querySelectorAll('button:not(#stopwatch-lap)');
     allButtons.forEach(button => {
         button.addEventListener('click', () => {
-            try { sounds.beep.play(); } catch (e) { console.error("Sound play error (button click):", e); }
+            playSound('beep'); // Use playSound function
         });
     });
     
