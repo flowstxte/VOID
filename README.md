@@ -14,7 +14,7 @@ VOID is a modern, futuristic-themed time management application featuring both a
 - **Dark/Light Theme**: Toggle between cyberpunk-inspired dark theme and a clean light theme
 - **Responsive Design**: Works seamlessly across desktop and mobile devices
 - **Visual Feedback**: Dynamic animations that respond to timer and stopwatch states
-- **Sound Effects**: Audio cues for timer ticks, completion, and lap recording
+- **Sound Effects**: Audio cues for timer ticks, completion, and lap recording with mute/unmute toggle
 
 ## Usage
 
@@ -46,7 +46,7 @@ VOID is a modern, futuristic-themed time management application featuring both a
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/flowstxte/VOID-site.git
+git clone https://github.com/flowstxte/VOID.git
 ```
 
 2. Open `index.html` in your web browser
