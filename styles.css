@@ -399,11 +399,17 @@ body {
     transition: color var(--transition-speed), text-shadow var(--transition-speed); /* Ensure transition */
 }
 
-/* Theme toggle */
-.theme-toggle {
+/* Top Controls (Theme & Mute) */
+.top-controls {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    display: flex;
+    gap: 0.5rem; /* Space between buttons */
+    z-index: 100;
+}
+
+.control-icon { /* Base style for top-right icons */
     background: none;
     border: none;
     color: var(--text-secondary);
@@ -411,15 +417,30 @@ body {
     cursor: pointer;
     font-size: 1.4rem; /* Larger icon */
     transition: all var(--transition-speed) ease;
-    z-index: 100;
     padding: 8px; /* More padding for easier clicking */
     border-radius: 50%;
+    display: flex; /* Ensure icon is centered */
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Explicit size */
+    height: 40px; /* Explicit size */
 }
 
-.theme-toggle:hover {
+/* .theme-toggle inherits from control-icon */
+/* Specific theme toggle styles can be added here if needed */
+
+/* .mute-toggle inherits from control-icon */
+/* Specific mute toggle styles can be added here if needed */
+
+.control-icon:hover {
     color: var(--accent);
-    transform: rotate(20deg) scale(1.1);
+    transform: scale(1.1); /* Simpler hover */
     text-shadow: var(--glow-intensity) var(--accent-glow);
+}
+
+/* Specific hover for theme toggle if desired */
+.theme-toggle:hover {
+     transform: scale(1.1) rotate(20deg); /* Keep rotation */
 }
 
 /* Animations */
@@ -1028,31 +1049,13 @@ body {
     z-index: 1;
 }
 
-
 /* --- END: NEW Animation Styles --- */
 
-
-/* Copyright Styles */
-.copyright {
-    /* position: absolute; */
-    margin-top: 1rem; /* Space above copyright */
-    width: 100%; /* Take full width of wrapper */
-    text-align: right; /* Align text to the right */
-}
-
-.copyright p {
-    font-size: 0.9rem; /* Slightly larger */
-    font-family: 'Roboto Mono', monospace; /* Change font */
-    color: var(--text-secondary);
-    opacity: 0.7;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out, color 0.3s ease-out, text-shadow 0.3s ease-out; /* Add transition for hover */
-}
 /* @keyframes floatAnimation { ... } */
 
 /* New Hover Animation: Color Shift + Underline */
 .header h1,
-.header p,
-.copyright p {
+.header p {
     position: relative; /* Needed for pseudo-element */
     display: inline-block; /* Ensure underline fits content */
     padding-bottom: 2px; /* Space for underline */
@@ -1060,8 +1063,7 @@ body {
 }
 
 .header h1::after,
-.header p::after,
-.copyright p::after {
+.header p::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -1073,16 +1075,14 @@ body {
 }
 
 .header h1:hover,
-.header p:hover,
-.copyright p:hover {
+.header p:hover {
     opacity: 1; /* Increase opacity */
     color: var(--accent); /* Change color to accent */
     /* text-shadow: none; */
 }
 
 .header h1:hover::after,
-.header p:hover::after,
-.copyright p:hover::after {
+.header p:hover::after {
     width: 100%; /* Expand underline on hover */
 }
 /* --- END: Animation Styles --- */
