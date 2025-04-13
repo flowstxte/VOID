@@ -14,9 +14,14 @@
 <body>
     <div class="main-wrapper"> <!-- Added wrapper -->
         <div class="container">
-            <button class="theme-toggle" id="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+            <div class="top-controls"> <!-- Wrapper for top buttons -->
+                <button class="control-icon mute-toggle" id="mute-toggle">
+                    <i class="fas fa-volume-up"></i> <!-- Start with sound on -->
+                </button>
+                <button class="control-icon theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
 
             <div class="app-container">
                 <div class="tabs">
@@ -106,9 +111,6 @@
                         <div class="dots" id="dots"></div>
                         <div class="lines-container" id="lines-container"></div>
                     </div>
-                </div>
-                <div class="copyright">
-                    <p>&copy; flowstxte</p> <!-- Added copyright -->
                 </div>
             </div>
         </div> <!-- End of .container -->
