@@ -13,6 +13,7 @@
     --input-bg: #0f0f0f;
     --transition-speed: 0.3s; /* Variable for transition speed */
     --glow-intensity: 0 0 15px; /* Variable for glow effect */
+    --flash-bg: rgba(255, 255, 255, 0.1); /* Flash background for dark theme */
 }
 
 /* Light Theme Definition (Refined) */
@@ -30,6 +31,7 @@
     --input-bg: #e8e8e8;
     --transition-speed: 0.3s;
     --glow-intensity: 0 0 15px;
+    --flash-bg: rgba(0, 0, 0, 0.05); /* Flash background for light theme */
 }
 
 * {
@@ -343,6 +345,13 @@ body {
     box-shadow: var(--glow-intensity) var(--accent-glow), 0 4px 10px rgba(0,0,0,0.3); /* Glow and larger shadow */
 }
 
+/* Style for the add time buttons */
+.control-btn.add-time {
+    font-size: 1.1rem; /* Slightly smaller font for text */
+    font-family: 'Audiowide', sans-serif; /* Ensure correct font */
+    font-weight: 600;
+}
+
 /* .control-btn.start, .control-btn.resume { ... } */
 /* .control-btn.pause { ... } */
 
@@ -579,6 +588,16 @@ body {
     opacity: 0.5;
     color: var(--accent); /* Use accent color during flash */
     text-shadow: none;
+}
+
+/* Style for the time added flash effect */
+@keyframes timeAddedFlash {
+    0%, 100% { background-color: transparent; }
+    50% { background-color: var(--flash-bg); } /* Use CSS variable */
+}
+
+.time-display.time-added-flash {
+    animation: timeAddedFlash 0.3s ease-out;
 }
 
 /* Responsive design */
@@ -1050,7 +1069,6 @@ body {
 }
 
 /* --- END: NEW Animation Styles --- */
-
 /* @keyframes floatAnimation { ... } */
 
 /* New Hover Animation: Color Shift + Underline */
