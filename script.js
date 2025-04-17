@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const customMinutesInput = document.getElementById('custom-minutes');
     const customSecondsInput = document.getElementById('custom-seconds');
     const setCustomTimeBtn = document.getElementById('set-custom-time');
+    const timerAdd1mBtn = document.getElementById('timer-add-1m'); // New button
+    const timerAdd5mBtn = document.getElementById('timer-add-5m'); // New button
 
     // Stopwatch Elements
     const stopwatchDisplay = document.getElementById('stopwatch-display');
@@ -356,7 +358,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // --- END: NEW Animation Logic ---
 
-
     // Timer Functions
     function startTimer() {
         console.log('Start timer clicked');
@@ -462,6 +463,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (timerDisplay) timerDisplay.classList.remove('flashing');
             }
         }, 400);
+    }
+
+    // Function to add time to the timer
+    function addTimerTime(secondsToAdd) {
+        console.log(`Adding ${secondsToAdd} seconds to timer`);
+        timerTimeLeft += secondsToAdd;
+        // Ensure total time is also updated if the added time extends beyond the original total
+        // This might be relevant if progress indicators were based on totalTime
+        if (timerTimeLeft > timerTotalTime) {
+            timerTotalTime = timerTimeLeft;
+        }
+        updateTimerDisplay();
+        // Optional: Add visual feedback like a quick flash or animation
+        if (timerDisplay) {
+            timerDisplay.classList.add('time-added-flash');
+            setTimeout(() => timerDisplay.classList.remove('time-added-flash'), 300);
+        }
     }
 
     // Stopwatch Functions
@@ -599,6 +617,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (timerStartBtn) timerStartBtn.addEventListener('click', startTimer);
     if (timerPauseBtn) timerPauseBtn.addEventListener('click', pauseTimer);
     if (timerResetBtn) timerResetBtn.addEventListener('click', resetTimer);
+    if (timerAdd1mBtn) timerAdd1mBtn.addEventListener('click', () => addTimerTime(60));
+    if (timerAdd5mBtn) timerAdd5mBtn.addEventListener('click', () => addTimerTime(300));
 
     presetButtons.forEach(button => {
         button.addEventListener('click', () => {
