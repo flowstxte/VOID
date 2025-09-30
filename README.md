@@ -1,75 +1,88 @@
-# VOID - Temporal Interface
+# VOID – Temporal Interface
 
-VOID is a modern, futuristic-themed time management application featuring both a timer and stopwatch with a sleek, animated interface.
+VOID is a modern, futuristic-themed time management app featuring both a timer and stopwatch with a sleek animated interface.  
 
-Go To: https://flowstxte.github.io/VOID/
+🌐 **Live App**: [VOID on GitHub Pages](https://flowstxte.github.io/VOID/)
+
+---
+
+## Screenshots
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/flowstxte/VOID/refs/heads/main/ss1.png" width="45%" />
+  <img src="https://raw.githubusercontent.com/flowstxte/VOID/refs/heads/main/ss2.png" width="45%" />
+</p>
+
+---
 
 ## Features
+- **Timer Mode** – preset and custom countdown timers (5, 10, 15, 25, 50 minutes)  
+- **Stopwatch Mode** – track elapsed time with lap recording  
+- **Dark/Light Theme** – toggle between cyberpunk dark and clean light themes  
+- **Responsive Design** – works on desktop & mobile  
+- **Visual Feedback** – dynamic animations reacting to state  
+- **Sound Effects** – timer ticks, completion alerts, lap recordings (mute/unmute toggle)  
 
-- **Timer Mode**: Set custom countdown timers with preset options (5, 10, 15, 25, and 50 minutes)
-- **Stopwatch Mode**: Track elapsed time with lap recording functionality
-- **Dark/Light Theme**: Toggle between cyberpunk-inspired dark theme and a clean light theme
-- **Responsive Design**: Works seamlessly across desktop and mobile devices
-- **Visual Feedback**: Dynamic animations that respond to timer and stopwatch states
-- **Sound Effects**: Audio cues for timer ticks, completion, and lap recording with mute/unmute toggle
+---
 
 ## Usage
 
 ### Timer
-
-1. Select the "Timer" tab
-2. Choose a preset time or set a custom time using the input fields
-3. Use the controls to start, pause, and reset the timer
-4. When the timer completes, an alert sound will play
+1. Select the "Timer" tab  
+2. Choose a preset time or set a custom time  
+3. Start, pause, or reset the timer  
+4. Completion triggers an alert sound  
 
 ### Stopwatch
+1. Select the "Stopwatch" tab  
+2. Start, pause, or reset the stopwatch  
+3. Click flag button to record laps  
+4. View laps in the scrollable list  
 
-1. Select the "Stopwatch" tab
-2. Use the controls to start, pause, and reset the stopwatch
-3. Click the flag button to record lap times
-4. View recorded laps in the scrollable list below
+---
 
-## Technologies Used
+## Tech Stack
+<p>
+  <img src="https://skillicons.dev/icons?i=js,html,css" />
+</p>
 
-- HTML5
-- CSS3 with custom properties for theming
-- JavaScript (ES6+)
-- Howler.js for sound effects
-- Font Awesome for icons
-- Google Fonts (Audiowide and Roboto Mono)
+- HTML5  
+- CSS3 (custom properties for theming)  
+- JavaScript (ES6+)  
+- Howler.js for sound effects  
+- Font Awesome icons  
+- Google Fonts (Audiowide, Roboto Mono)  
+
+---
 
 ## Installation
-
-1. Clone this repository:
-
+1. Clone the repository:
 ```bash
 git clone https://github.com/flowstxte/VOID.git
-```
+````
 
-2. Open `index.html` in your web browser
+2. Open `index.html` in your browser.
 
-## Development
-
-The project structure is simple:
-
-- `index.html` - Main HTML structure
-- `styles.css` - All styling including responsive design and animations
-- `script.js` - Application logic and animation control
+---
 
 ## Browser Compatibility
 
-VOID works best in modern browsers that support CSS variables and modern JavaScript features:
+Works best in modern browsers:
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+* Chrome (latest)
+* Firefox (latest)
+* Safari (latest)
+* Edge (latest)
+
+---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License
+
+---
 
 ## Credits
 
-Designed and developed by [flowstxte](https://github.com/flowstxte)
-
+Designed and developed by **flowstxte**
+ [GitHub](https://github.com/flowstxte)
