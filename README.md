@@ -4,11 +4,6 @@ VOID is a modern, futuristic-themed time management application featuring both a
 
 Go To: https://flowstxte.github.io/VOID/
 
-## Screenshots
-
-<img src="https://iili.io/3c6Lxqb.png" alt="Dark Theme Timer" width="700">
-<img src="https://iili.io/3c6LnLu.png" alt="Light Theme Stopwatch" width="700">
-
 ## Features
 
 - **Timer Mode**: Set custom countdown timers with preset options (5, 10, 15, 25, and 50 minutes)
@@ -77,3 +72,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Credits
 
 Designed and developed by [flowstxte](https://github.com/flowstxte)
+
