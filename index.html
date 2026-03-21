@@ -12,24 +12,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="main-wrapper"> <!-- Added wrapper -->
+    <div class="main-wrapper">
         <div class="container">
-            <div class="top-controls"> <!-- Wrapper for top buttons -->
+            <div class="top-controls">
                 <button class="control-icon mute-toggle" id="mute-toggle">
-                    <i class="fas fa-volume-up"></i> <!-- Start with sound on -->
+                    <i class="fas fa-volume-up"></i>
                 </button>
                 <button class="control-icon theme-toggle" id="theme-toggle">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
-
             <div class="app-container">
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="timer">Timer</button>
                     <button class="tab-btn" data-tab="stopwatch">Stopwatch</button>
                 </div>
-
-                <!-- Timer Tab -->
                 <div class="content active" id="timer">
                     <div class="time-display" id="timer-display">
                         <div class="time-unit"><span id="timer-hours">00</span></div>
@@ -38,7 +35,6 @@
                         <span class="colon">:</span>
                         <div class="time-unit"><span id="timer-seconds">00</span></div>
                     </div>
-
                     <div class="presets">
                         <button class="preset-btn" data-time="300">5 min</button>
                         <button class="preset-btn" data-time="600">10 min</button>
@@ -54,7 +50,6 @@
                         <input type="number" id="custom-seconds" placeholder="SS" min="0" max="59" value="0">
                         <button id="set-custom-time">Set</button>
                     </div>
-
                     <div class="controls">
                         <button class="control-btn start" id="timer-start">
                             <i class="fas fa-play"></i>
@@ -69,8 +64,6 @@
                         <button class="control-btn add-time" id="timer-add-5m" data-add-time="300">+5m</button>
                     </div>
                 </div>
-
-                <!-- Stopwatch Tab -->
                 <div class="content" id="stopwatch">
                     <div class="time-display" id="stopwatch-display">
                         <div class="time-unit"><span id="stopwatch-minutes">00</span></div>
@@ -79,7 +72,6 @@
                         <span class="colon">.</span>
                         <div class="time-unit"><span id="stopwatch-milliseconds">00</span></div>
                     </div>
-
                     <div class="controls">
                         <button class="control-btn start" id="stopwatch-start">
                             <i class="fas fa-play"></i>
@@ -94,36 +86,30 @@
                             <i class="fas fa-redo-alt"></i>
                         </button>
                     </div>
-
                     <div class="laps" id="laps-container">
-                        <!-- Lap times will be added here dynamically -->
                     </div>
                 </div>
             </div>
-
-            <!-- Animation Container -->
-            <div class="animation-wrapper"> 
+            <div class="animation-wrapper">
                 <div class="header">
                     <h1>Void</h1>
                     <p>TEMPORAL INTERFACE</p>
                 </div>
                 <div class="animation-container">
-                    <div class="background-glow"></div> <!-- Keep this -->
+                    <div class="background-glow"></div>
                     <div class="frame" id="frame">
                         <div class="dots" id="dots"></div>
                         <div class="lines-container" id="lines-container"></div>
                     </div>
                 </div>
             </div>
-        </div> <!-- End of .container -->
-    </div> <!-- End of .main-wrapper -->
-
+        </div>
+    </div>
     <div id="mobile-overlay">
         <h2>Mobile Support Unavailable</h2>
         <p>This site is optimized for horizontal devices like tablets and PCs.</p>
         <p>Support for mobile/vertical layout might come in the future.</p>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js"></script>
     <script src="script.js"></script>
 </body>
