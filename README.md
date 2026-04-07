@@ -2,7 +2,7 @@
 
 VOID is a modern, futuristic-themed time management app featuring both a timer and stopwatch with a sleek animated interface.
 
-🌐 **Live App**: [VOID on GitHub Pages](https://flowstxte.github.io/VOID/)
+🌐 **Live App**: [VOID](https://flowstxte.github.io/VOID/)
 
 ---
 
@@ -45,10 +45,6 @@ VOID is a modern, futuristic-themed time management app featuring both a timer a
 
 ## Tech Stack
 
-<p>
-  <img src="https://skillicons.dev/icons?i=js,html,css" />
-</p>
-
 - HTML5
 - CSS3 (custom properties for theming)
 - JavaScript (ES6+)
@@ -81,13 +77,3 @@ Works best in modern browsers:
 
 ---
 
-## License
-
-MIT License
-
----
-
-## Credits
-
-Designed and developed by **flowstxte**
-[GitHub](https://github.com/flowstxte)
